@@ -1,0 +1,158 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Arial", sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid #444;
+}
+
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.header-text {
+    flex: 1;
+}
+
+.header-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.header-text p {
+    margin-bottom: 5px;
+}
+
+.header-text a {
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+.header-text a:hover {
+    text-decoration: underline;
+}
+
+/* About Section */
+.about h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #ffa500;
+    font-family: "Josefin Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.about p {
+    line-height: 1.8;
+    font-family: "Reddit Mono", serif;
+    font-weight: 250;
+    font-style:normal;
+}
+
+/* Links Section */
+.links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.links a {
+    text-decoration: none;
+    background: #444;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.links a:hover {
+    background: #1e90ff;
+    transform: translateY(-3px);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid #444;
+    margin-top: 30px;
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .header-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .links a {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-text p {
+        font-size: 0.9rem;
+    }
+
+    .about h2 {
+        font-size: 1.6rem;
+    }
+
+    .about p {
+        font-size: 0.9rem;
+    }
+}
