@@ -3,7 +3,10 @@ import type { Context } from 'hono'
 import { cors } from 'hono/cors';
 
 const app = new Hono()
-app.use('/*', cors())
+app.use('/*', cors({
+  origin : ["https://pshycodr.me"],
+  allowMethods : ['GET']
+}))
 
 // app.get('/setup', async (c: Context) => {
 //   const db = c.env.VISITORS_DB as D1Database;
