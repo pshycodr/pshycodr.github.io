@@ -49,7 +49,6 @@
             <p>
                 Full-stack developer skilled in <b>MERN stack, Hono.js, Django Rest Framework, and TypeScript</b>, with expertise in building scalable web applications and cloud-native solutions. Developed impactful projects like a <b>Hospital Management System</b> (Django/Firebase) for patient management, a <b>Blog Platform</b> (React/Hono.js/Cloudflare Workers) optimized for high performance, and a <b>Song Recommender Chatbot</b> (DRF/React/Gemini API/Spotify) that suggests songs based on user emotions and queries. Gained hands-on experience through internships at <u>Postulate Info Tech</u> (Ionic/Angular) and <u>Ardent Computech</u> (full-stack development), rapidly mastering new tools to deliver efficient solutions. Experienced with <b>Supabase, Prisma, PostgreSQL, AWS, Docker, and GitHub Actions</b> for robust backend development. Love to contribute to open source, passionate about crafting intuitive user experiences and solving real-world problems.
             </p>
-            
         </section>
 
         <!-- Links Section -->
@@ -62,9 +61,31 @@
         <!-- Footer -->
         <footer>
             <p>&copy; 2025 Anish Roy. Built with ❤️ and lots of ☕.</p>
+            <p id="visitor-counter">Loading visitor count...</p>
         </footer>
     </div>
 
-  
+    <script>
+        async function updateVisitorCount() {
+            try {
+                const res = await fetch("https://visitor-tracker.aroy262692.workers.dev/visit");
+                const data = await res.json();
+                
+                const counterElement = document.getElementById('visitor-counter');
+                if (counterElement) {
+                    counterElement.textContent = `Total Visitors: ${data.totalVisitors} | Unique Visitors: ${data.totalUniqueVisitors}`;
+                }
+            } catch (error) {
+                console.error('Error fetching visitor count:', error);
+                const counterElement = document.getElementById('visitor-counter');
+                if (counterElement) {
+                    counterElement.textContent = 'Visitor counter unavailable';
+                }
+            }
+        }
+
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', updateVisitorCount);
+    </script>
 </body>
 </html>

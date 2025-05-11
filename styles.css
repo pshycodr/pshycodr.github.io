@@ -151,3 +151,10 @@ footer {
         font-size: 0.9rem;
     }
 }
+
+#visitor-counter {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #aaa;
+    font-family: "Space Mono", monospace;
+}
