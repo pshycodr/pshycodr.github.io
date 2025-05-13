@@ -1,11 +1,12 @@
 import { Hono } from 'hono'
 import type { Context } from 'hono'
 import { cors } from 'hono/cors';
+import CIDR from 'ip-cidr';
 
 const app = new Hono()
 app.use('/*', cors({
-  origin : ["https://pshycodr.me"],
-  allowMethods : ['GET']
+  origin: ["https://pshycodr.me"],
+  allowMethods: ['GET']
 }))
 
 // app.get('/setup', async (c: Context) => {
@@ -30,19 +31,22 @@ app.use('/*', cors({
 //   }
 // });
 
+const allowedCIDR = new CIDR('103.43.81.0/24');
 app.get('/visit', async (c: Context) => {
-  const ip = (c.req.header('CF-Connecting-IP') || 'unknown-ip').replace(/[^a-zA-Z0-9.-]/g, '');
+
+  const ip = c.req.header('CF-Connecting-IP');
+  if (!ip || !CIDR.isValidAddress(ip)) {
+    return c.json({ error: 'Invalid or missing IP address' }, 400);
+  }
   const country = c.req.header('CF-IPCountry') || 'unknown-country';
 
   // console.log([ip, country]);
-  
+
   const db = c.env.VISITORS_DB as D1Database;
 
-  const blockIps = ["103.43.81.5", "103.43.81.41", "103.43.81.6", "103.43.81.60", " 103.43.81.13", "152.59.163.169", "240940e11000d2c38000"]
 
   try {
-
-    if (!blockIps.includes(ip)) {
+    if (!allowedCIDR.contains(ip)) {
       await db.prepare(`
         INSERT INTO Visitor (ip, country, count) 
         VALUES (?, ?, 1)
