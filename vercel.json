@@ -1,0 +1,11 @@
+{
+    "builds": [
+      {
+        "use": "@vercel/static-build",
+        "config": {
+          "ignore": ["visitor-tracker/**"]
+        }
+      }
+    ]
+  }
+  
