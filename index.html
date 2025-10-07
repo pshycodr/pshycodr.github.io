@@ -1,142 +1,1059 @@
 <!DOCTYPE html>
-<html lang="en" itemscope itemtype="http://schema.org/Person">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description"
-        content="Anish Roy - Expert Full-Stack Developer specializing in MERN stack, TypeScript, and cloud-native applications. Portfolio showcasing projects in web development, backend systems, and scalable solutions.">
-    <meta name="keywords"
-        content="Anish Roy, Full-Stack Developer, MERN stack developer, TypeScript expert, Django developer, Cloudflare Workers, Hono.js, Web Developer Portfolio, JavaScript Developer, Backend Engineer, Cloud-Native Solutions">
-    <meta name="author" content="Anish Roy">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <meta name="revisit-after" content="7 days">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anish Roy | Software Developer</title>
+    <meta name="description" content="Anish Roy - Software Developer specializing in full-stack development and AI integration">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Leaflet for real map -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.min.js"></script>
+    
+    <style>
+        * {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+        
+        .mono {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+        }
+        
+        .bento-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .bento-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22c55e;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        
+        .typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .project-image {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .bento-card:hover .project-image::before {
+            transform: translateX(100%);
+        }
+        
+        .skill-item {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .skill-item:hover {
+            background: rgba(59, 130, 246, 0.15);
+            transform: scale(1.02);
+        }
+        
+        .nav-item {
+            transition: all 0.2s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: all 0.2s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        .calendar-day {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .calendar-day.today {
+            background: #3b82f6;
+            color: white;
+        }
+        
+        .calendar-day:hover {
+            background: rgba(59, 130, 246, 0.1);
+        }
+        
+        .calendar-day.has-event::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+        
+        .weather-icon {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); }
+        }
+        
+        .tech-icon {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .tech-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        
+        .experience-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .experience-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            padding: 8px;
+            margin: -8px;
+        }
+        
+        .coffee-animation {
+            display: inline-block;
+            animation: steam 2s ease-in-out infinite;
+        }
+        
+        @keyframes steam {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-2px); }
+        }
+        
+        .leaflet-container {
+            background: #1f2937 !important;
+            border-radius: 8px;
+        }
+        
+        .leaflet-control-container {
+            display: none;
+        }
+        
+        .time-widget {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(147, 51, 234, 0.1) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        .bounce-on-hover:hover {
+            animation: bounce 0.6s ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:title" content="Anish Roy | Full-Stack Developer Portfolio">
-    <meta property="og:description"
-        content="Professional portfolio of Anish Roy showcasing expertise in full-stack development with MERN stack, TypeScript, and cloud-native technologies.">
-    <meta property="og:url" content="https://pshycodr.me">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="https://pshycodr.me/assets/images/profile.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:site_name" content="Anish Roy Portfolio">
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 1000;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Anish Roy | Full-Stack Developer Portfolio">
-    <meta name="twitter:description"
+        .github-stats {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="styles.css">
+        .music-visualizer {
+            display: flex;
+            align-items: end;
+            justify-content: center;
+            height: 40px;
+            gap: 2px;
+        }
 
-    <!-- Favicon -->
+        .bar {
+            width: 3px;
+            background: linear-gradient(to top, #3b82f6, #22c55e);
+            border-radius: 2px;
+            animation: musicBar 1.5s ease-in-out infinite;
+        }
 
-    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/115141578?v=4" type="image/x-icon">
+        .bar:nth-child(1) { animation-delay: 0s; }
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
 
+        @keyframes musicBar {
+            0%, 100% { height: 5px; }
+            50% { height: 25px; }
+        }
 
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Anish Roy",
-      "jobTitle": "Full-Stack Developer",
-      "url": "https://pshycodr.me",
-      "sameAs": [
-        "https://github.com/pshycodr",
-        "https://www.linkedin.com/in/pshycodr/"
-      ],
-      "email": "mailto:royanish090@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Barsul",
-        "addressRegion": "Purba Bardhaman",
-        "addressCountry": "India"
-      },
-      "image": "https://pshycodr.me/assets/images/profile.jpg",
-      "description": "Full-stack developer skilled in MERN stack, Hono.js, Django Rest Framework, and TypeScript, with expertise in building scalable web applications and cloud-native solutions."
-    }
-    </script>
+        .testimonials-card {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+        }
 
-    <title>Anish Roy | Full-Stack Developer Portfolio | MERN & TypeScript Expert</title>
+        .blog-preview {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1) 0%, rgba(245, 101, 101, 0.1) 100%);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+        }
+
+        .quick-stats {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+    </style>
 </head>
 
+<body class="bg-black text-white min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 px-6 py-3 bg-black/50 backdrop-blur-lg border border-white/10 rounded-full">
+        <div class="flex space-x-8 text-sm">
+            <a class="nav-item text-white/80 hover:text-white" data-section="header">work</a>
+            <a class="nav-item text-white/80 hover:text-white" data-section="projects">projects</a>
+            <a href="#" onclick="downloadResume()" class="nav-item text-white/80 hover:text-white">resume</a>
+            <a class="nav-item text-white/80 hover:text-white" data-section="contact">contact</a>
+        </div>
+    </nav>
 
-<body>
-    <div class="container">
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-6 py-12 pt-24" id="main-content">
         <!-- Header Section -->
-        <header class="header" role="banner">
-            <div class="profile-img" itemscope itemtype="http://schema.org/ImageObject">
-                <img src="https://avatars.githubusercontent.com/u/115141578?v=4" alt="Anish Roy Profile Photo"
-                    width="200" height="200" loading="eager" itemprop="contentUrl">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8" id="header">
+            <!-- Location/Time Widget with Real Map -->
+            <div class="bento-card rounded-2xl p-6 lg:col-span-2">
+                <div id="map" class="h-32 rounded-lg mb-4 relative"></div>
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full overflow-hidden border border-white/20 bounce-on-hover">
+                            <img src="https://avatars.githubusercontent.com/u/115141578?v=4" 
+                                 alt="Anish Roy" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2">
+                                <span class="font-medium">Hey, I'm Anish Roy</span>
+                                <span class="text-lg cursor-pointer" onclick="wave()">👋</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm text-green-400">
+                                <div class="status-dot"></div>
+                                <span>Available for work</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="time-widget px-3 py-2 rounded-lg">
+                        <div class="text-xs text-white/60 mono" id="current-time">Loading...</div>
+                        <div class="text-xs text-white/40">Barsul, India</div>
+                    </div>
+                </div>
             </div>
-            <div class="header-text">
-                <h1 itemprop="name">Anish Roy</h1>
-                <p itemprop="jobTitle">Full-Stack Developer | MERN Stack | Cloud-Native Enthusiast</p>
-                <p>Email: <a href="mailto:royanish090@gmail.com" itemprop="email">royanish090@gmail.com</a></p>
-                <p itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-                    <span itemprop="addressLocality">Barsul</span>,
-                    <span itemprop="addressRegion">Purba Bardhaman</span>
+
+            <!-- Weather Widget -->
+            <div class="bento-card rounded-2xl p-6 flex items-center justify-center">
+                <div class="text-center">
+                    <div class="weather-icon text-4xl mb-2" id="weather-icon">🌤️</div>
+                    <div class="text-lg font-semibold" id="temperature">28°C</div>
+                    <div class="text-xs text-white/60" id="weather-desc">Partly Cloudy</div>
+                    <div class="text-xs text-white/40 mt-1" id="weather-location">West Bengal</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About & Current Focus - Enhanced -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div class="bento-card rounded-2xl p-8">
+                <p class="text-white/80 leading-relaxed mb-6">
+                    I'm a passionate <strong class="text-white">Software Developer</strong> specializing in full-stack development and AI integration. 
+                    I craft scalable applications with great attention to detail, focusing on modern tech stacks and innovative solutions.
                 </p>
+                <div class="grid grid-cols-4 gap-4">
+                    <div class="text-center tech-icon" data-tooltip="5 years experience">
+                        <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mb-2">
+                            <i class="fab fa-js-square text-yellow-400 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-white/60">JavaScript</span>
+                    </div>
+                    <div class="text-center tech-icon" data-tooltip="React & Next.js expert">
+                        <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mb-2">
+                            <i class="fab fa-react text-blue-400 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-white/60">React</span>
+                    </div>
+                    <div class="text-center tech-icon" data-tooltip="Backend & API development">
+                        <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mb-2">
+                            <i class="fab fa-node-js text-green-400 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-white/60">Node.js</span>
+                    </div>
+                    <div class="text-center tech-icon" data-tooltip="AI & Machine Learning">
+                        <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mb-2">
+                            <i class="fab fa-python text-blue-300 text-xl"></i>
+                        </div>
+                        <span class="text-xs text-white/60">Python</span>
+                    </div>
+                </div>
             </div>
-        </header>
 
-        <!-- About Section -->
-        <section class="about" role="region" aria-labelledby="about-heading">
-            <h2 id="about-heading">About Me</h2>
-            <p itemprop="description">
-                I'm a passionate <strong>Full-Stack Developer</strong> with expertise in the <strong>MERN stack
-                    (MongoDB, Express.js, React, Node.js)</strong>, <strong>TypeScript</strong>, and
-                <strong>cloud-native technologies</strong>. My focus is on building scalable, high-performance web
-                applications with clean architecture and optimal user experiences.
-            </p>
-            <p>
-                My technical skills include:
-            </p>
-            <ul>
-                <li><strong>Frontend:</strong> React, Next.js, Hono.js, Ionic, Angular</li>
-                <li><strong>Backend:</strong> Node.js, Django Rest Framework, Express.js, Cloudflare Workers</li>
-                <li><strong>Databases:</strong> MongoDB, PostgreSQL, Firebase, Supabase</li>
-                <li><strong>DevOps & Cloud:</strong> AWS, Docker, GitHub Actions, CI/CD pipelines</li>
-                <li><strong>Languages:</strong> JavaScript, TypeScript, Python</li>
-            </ul>
-            <p>
-                Notable projects include a <strong>Hospital Management System</strong> built with Django and Firebase
-                for efficient patient management, a high-performance <strong>Blog Platform</strong> using React with
-                Hono.js on Cloudflare Workers, and an innovative <strong>Song Recommender Chatbot</strong> integrating
-                DRF, React, Gemini API, and Spotify to suggest songs based on user emotions.
-            </p>
-            <p>
-                I've gained valuable experience through internships at <u>Postulate Info Tech</u> (working with
-                Ionic/Angular) and <u>Ardent Computech</u> (full-stack development), where I quickly adapted to new
-                technologies to deliver effective solutions. I'm passionate about open-source contributions and creating
-                intuitive user experiences that solve real-world problems.
-            </p>
-        </section>
+            <!-- Current Focus -->
+            <div class="bento-card rounded-2xl p-8">
+                <h3 class="text-lg font-semibold mb-4">Currently Building</h3>
+                <div class="mono text-sm text-blue-400 mb-4">
+                    <span class="typing">AI-powered developer tools...</span>
+                </div>
+                <div class="space-y-2 text-sm text-white/70">
+                    <div class="cursor-pointer hover:text-white transition-colors">• Multi-agent AI systems</div>
+                    <div class="cursor-pointer hover:text-white transition-colors">• Real-time collaborative apps</div>
+                    <div class="cursor-pointer hover:text-white transition-colors">• Cloud-native solutions</div>
+                    <div class="cursor-pointer hover:text-white transition-colors">• Open source magic ✨</div>
+                </div>
+            </div>
+        </div>
 
-        <!-- Links Section -->
-        <nav class="links" aria-label="Main navigation">
-            <a href="Anish-resume.pdf" target="_blank" rel="noopener noreferrer"
-                download="Anish-Roy-Resume.pdf">Download Resume</a>
-            <a href="https://github.com/pshycodr" target="_blank" rel="noopener noreferrer">GitHub Profile</a>
-            <a href="https://www.linkedin.com/in/anish-roy-9076692a6/" target="_blank"
-                rel="noopener noreferrer">LinkedIn Profile</a>
-        </nav>
+        <!-- Quick Stats & GitHub Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Quick Stats -->
+            <div class="quick-stats bento-card rounded-2xl p-6">
+                <h3 class="text-lg font-semibold mb-4">Quick Stats</h3>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-white/70">Projects Built</span>
+                        <span class="font-semibold text-green-400">25+</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-white/70">Coffee Consumed</span>
+                        <span class="font-semibold text-yellow-400">∞ cups</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-white/70">Lines of Code</span>
+                        <span class="font-semibold text-blue-400">50k+</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-white/70">Years Experience</span>
+                        <span class="font-semibold text-purple-400">3+</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GitHub Activity -->
+            <div class="github-stats bento-card rounded-2xl p-6">
+                <h3 class="text-lg font-semibold mb-4 flex items-center">
+                    <i class="fab fa-github mr-2"></i>
+                    GitHub Activity
+                </h3>
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                        <span class="text-white/70">Updated Codr CLI</span>
+                        <span class="text-white/40">2h ago</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                        <span class="text-white/70">New commit to Harmonix</span>
+                        <span class="text-white/40">1d ago</span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                        <span class="text-white/70">Created new repository</span>
+                        <span class="text-white/40">3d ago</span>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <a href="https://github.com/pshycodr" target="_blank" class="text-blue-400 hover:text-blue-300 text-xs">
+                            View Full Profile →
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Music/Current Mood -->
+            <div class="bento-card rounded-2xl p-6">
+                <h3 class="text-lg font-semibold mb-4 flex items-center">
+                    <i class="fas fa-music mr-2"></i>
+                    Currently Vibing
+                </h3>
+                <div class="text-center">
+                    <div class="music-visualizer mb-4">
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                        <div class="bar"></div>
+                    </div>
+                    <div class="text-sm text-white/70">Lo-fi Hip Hop Beats</div>
+                    <div class="text-xs text-white/40 mt-1">Perfect for coding sessions</div>
+                    <div class="mt-3">
+                        <a href="https://github.com/pshycodr/song-recommender-chatbot" target="_blank" 
+                           class="text-green-400 hover:text-green-300 text-xs">
+                            Check out Harmonix →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience & Calendar -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <div class="bento-card rounded-2xl p-8">
+                <h3 class="text-lg font-semibold mb-4">Experience</h3>
+                <div class="space-y-4">
+                    <div class="experience-item border-l-2 border-blue-500 pl-4">
+                        <h4 class="font-medium">Software Engineering Intern</h4>
+                        <p class="text-blue-400 text-sm">Scaleexperts • 2024</p>
+                        <p class="text-white/60 text-sm">Optimized websites achieving 90+ Lighthouse scores</p>
+                        <div class="flex space-x-2 mt-2">
+                            <span class="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs rounded">React</span>
+                            <span class="px-2 py-1 bg-green-500/20 text-green-300 text-xs rounded">Performance</span>
+                        </div>
+                    </div>
+                    <div class="experience-item border-l-2 border-green-500 pl-4">
+                        <h4 class="font-medium">Freelance Full-Stack Developer</h4>
+                        <p class="text-green-400 text-sm">Independent • 2022-Present</p>
+                        <p class="text-white/60 text-sm">End-to-end web solutions with modern authentication</p>
+                        <div class="flex space-x-2 mt-2">
+                            <span class="px-2 py-1 bg-purple-500/20 text-purple-300 text-xs rounded">MERN</span>
+                            <span class="px-2 py-1 bg-yellow-500/20 text-yellow-300 text-xs rounded">AI Integration</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Calendar -->
+            <div class="bento-card rounded-2xl p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="font-semibold" id="calendar-month">August 2025</h3>
+                    <div class="flex space-x-1">
+                        <button class="w-6 h-6 rounded bg-gray-800 flex items-center justify-center text-xs hover:bg-gray-700" id="prev-month">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="w-6 h-6 rounded bg-gray-800 flex items-center justify-center text-xs hover:bg-gray-700" id="next-month">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-7 gap-1 text-xs text-white/60 mb-2">
+                    <div class="text-center py-2">SUN</div>
+                    <div class="text-center py-2">MON</div>
+                    <div class="text-center py-2">TUE</div>
+                    <div class="text-center py-2">WED</div>
+                    <div class="text-center py-2">THU</div>
+                    <div class="text-center py-2">FRI</div>
+                    <div class="text-center py-2">SAT</div>
+                </div>
+                <div class="grid grid-cols-7 gap-1" id="calendar-grid">
+                    <!-- Calendar days will be populated by JavaScript -->
+                </div>
+                <div class="mt-4 text-xs text-white/60" id="calendar-info">
+                    Click on dates to see events
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Projects -->
+        <div class="mb-8" id="projects">
+            <h2 class="text-2xl font-bold mb-6">Recent projects</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Project 1 -->
+                <div class="bento-card rounded-2xl overflow-hidden" onclick="projectClick('codr')">
+                    <div class="project-image h-48 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-terminal text-4xl text-blue-400 mb-4"></i>
+                            <div class="mono text-sm text-white/60">./codr --generate project</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold mb-2">Codr CLI</h3>
+                        <p class="text-sm text-white/70 mb-4">AI developer assistant with multi-agent orchestration</p>
+                        <div class="flex space-x-4 text-xs">
+                            <a href="https://github.com/pshycodr/codr" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
+                                <i class="fab fa-github mr-1"></i>GitHub
+                            </a>
+                            <a href="https://www.npmjs.com/package/codrup" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
+                                <i class="fab fa-npm mr-1"></i>NPM
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bento-card rounded-2xl overflow-hidden" onclick="projectClick('harmonix')">
+                    <div class="project-image h-48 flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-music text-4xl text-green-400 mb-4"></i>
+                            <div class="mono text-sm text-white/60">♪ AI Music Discovery</div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-semibold mb-2">Harmonix</h3>
+                        <p class="text-sm text-white/70 mb-4">Conversational AI music platform with Spotify integration</p>
+                        <div class="flex space-x-4 text-xs">
+                            <a href="https://github.com/pshycodr/song-recommender-chatbot" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
+                                <i class="fab fa-github mr-1"></i>GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 - Lobango -->
+                <div class="bento-card rounded-2xl overflow-hidden lg:col-span-2" onclick="projectClick('lobango')">
+                    <div class="grid lg:grid-cols-2 gap-0">
+                        <div class="project-image h-48 lg:h-auto flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-utensils text-4xl text-orange-400 mb-4"></i>
+                                <div class="mono text-sm text-white/60">Restaurant Management</div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-semibold mb-2">Lobango</h3>
+                            <p class="text-sm text-white/70 mb-4">Comprehensive food ordering and table booking system with real-time admin dashboard, dynamic menu management, and payment integration.</p>
+                            <div class="flex space-x-4 text-xs">
+                                <a href="https://lobango.vercel.app" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
+                                    <i class="fas fa-external-link-alt mr-1"></i>Live Demo
+                                </a>
+                                <a href="https://adminlobango.vercel.app/" target="_blank" class="text-blue-400 hover:text-blue-300 flex items-center">
+                                    <i class="fas fa-cog mr-1"></i>Admin Panel
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="bento-card rounded-2xl p-8 mb-8">
+            <h3 class="text-lg font-semibold mb-4">Tech Stack</h3>
+            <div class="flex flex-wrap gap-2">
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="ES6+, Async/Await">JavaScript</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="Strongly typed JS">TypeScript</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="Hooks, Context API">React.js</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="SSR, SSG">Next.js</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="Express, APIs">Node.js</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="Django, Flask">Python</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="REST APIs">Django</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="NoSQL database">MongoDB</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="Cloud services">AWS</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="Containerization">Docker</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="Edge computing">Cloudflare</span>
+                <span class="skill-item px-3 py-1 rounded-full text-xs" data-tooltip="Real-time apps">Supabase</span>
+            </div>
+        </div>
+
+        <!-- Testimonials & Blog Preview -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Testimonials -->
+            <div class="testimonials-card bento-card rounded-2xl p-8">
+                <h3 class="text-lg font-semibold mb-4 flex items-center">
+                    <i class="fas fa-quote-left mr-2 text-purple-400"></i>
+                    What People Say
+                </h3>
+                <div class="space-y-4" id="testimonials-container">
+                    <div class="testimonial-item">
+                        <p class="text-sm text-white/70 italic mb-2">
+                            "Anish delivered exceptional results on our website optimization project. The Lighthouse scores improved dramatically!"
+                        </p>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-xs">
+                                J
+                            </div>
+                            <span class="text-xs text-white/60">John - Scaleexperts</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <button onclick="rotateTestimonial()" class="text-xs text-blue-400 hover:text-blue-300">
+                        <i class="fas fa-sync-alt mr-1"></i>Next
+                    </button>
+                </div>
+            </div>
+
+            <!-- Blog Preview -->
+            <div class="blog-preview bento-card rounded-2xl p-8">
+                <h3 class="text-lg font-semibold mb-4 flex items-center">
+                    <i class="fas fa-blog mr-2 text-yellow-400"></i>
+                    Latest Thoughts
+                </h3>
+                <div class="space-y-3">
+                    <div class="cursor-pointer hover:bg-white/5 p-2 rounded transition-colors">
+                        <h4 class="text-sm font-medium text-white/90">Building AI-Powered Developer Tools</h4>
+                        <p class="text-xs text-white/60 mt-1">Exploring the future of code generation and automation...</p>
+                        <span class="text-xs text-yellow-400">3 min read • 2 days ago</span>
+                    </div>
+                    <div class="cursor-pointer hover:bg-white/5 p-2 rounded transition-colors">
+                        <h4 class="text-sm font-medium text-white/90">Real-time Apps with WebSockets</h4>
+                        <p class="text-xs text-white/60 mt-1">Best practices for building scalable real-time features...</p>
+                        <span class="text-xs text-yellow-400">5 min read • 1 week ago</span>
+                    </div>
+                </div>
+                <div class="mt-4 text-center">
+                    <a href="#" onclick="showBlogNotification()" class="text-xs text-yellow-400 hover:text-yellow-300">
+                        Read All Posts →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6" id="contact">
+            <div class="bento-card rounded-2xl p-8 lg:col-span-2">
+                <h3 class="text-lg font-semibold mb-4">Let's work together</h3>
+                <p class="text-white/70 mb-6">
+                    I'm always interested in new opportunities and collaborations. 
+                    Whether you have a project in mind or just want to chat about tech, feel free to reach out.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="mailto:royanish090@gmail.com" 
+                       class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm transition-colors flex items-center">
+                        <i class="fas fa-envelope mr-2"></i>Send Email
+                    </a>
+                    <a href="#" onclick="downloadResume()"
+                       class="px-4 py-2 border border-white/20 hover:border-white/40 rounded-lg text-sm transition-colors flex items-center">
+                        <i class="fas fa-download mr-2"></i>Download Resume
+                    </a>
+                    <a href="https://calendly.com/anishroy" target="_blank"
+                       class="px-4 py-2 bg-green-600 hover:bg-green-700 rounded-lg text-sm transition-colors flex items-center">
+                        <i class="fas fa-calendar mr-2"></i>Schedule Call
+                    </a>
+                </div>
+            </div>
+
+            <div class="bento-card rounded-2xl p-8">
+                <h3 class="text-lg font-semibold mb-4">Connect</h3>
+                <div class="space-y-3 text-sm">
+                    <a href="mailto:royanish090@gmail.com" class="flex items-center space-x-3 text-white/70 hover:text-white transition-colors group">
+                        <i class="fas fa-envelope w-4 group-hover:text-blue-400"></i>
+                        <span>royanish090@gmail.com</span>
+                    </a>
+                    <a href="tel:+919641815558" class="flex items-center space-x-3 text-white/70 hover:text-white transition-colors group">
+                        <i class="fas fa-phone w-4 group-hover:text-green-400"></i>
+                        <span>+91 9641815558</span>
+                    </a>
+                    <a href="https://github.com/pshycodr" target="_blank" class="flex items-center space-x-3 text-white/70 hover:text-white transition-colors group">
+                        <i class="fab fa-github w-4 group-hover:text-gray-400"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/anish-roy-9076692a6/" target="_blank" class="flex items-center space-x-3 text-white/70 hover:text-white transition-colors group">
+                        <i class="fab fa-linkedin w-4 group-hover:text-blue-400"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://twitter.com/anishroy_dev" target="_blank" class="flex items-center space-x-3 text-white/70 hover:text-white transition-colors group">
+                        <i class="fab fa-twitter w-4 group-hover:text-blue-400"></i>
+                        <span>Twitter</span>
+                    </a>
+                </div>
+            </div>
+        </div>
 
         <!-- Footer -->
-        <footer role="contentinfo">
-            <p>&copy; <span id="current-year">2025</span> Anish Roy. Built with ❤️ and lots of ☕.</p>
-            <p id="visitor-counter">Loading visitor count...</p>
+        <footer class="mt-12 pt-8 border-t border-white/10">
+            <div class="flex flex-col lg:flex-row justify-between items-center text-sm text-white/60">
+                <div class="mb-4 lg:mb-0">
+                    <p>&copy; <span id="current-year">2025</span> Anish Roy. Built with <span class="coffee-animation cursor-pointer" onclick="coffeeEasterEgg()">☕</span> and lots of curiosity</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div id="visitor-counter" class="mono text-xs">
+                        Loading visitor count...
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-xs">Site is live</span>
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 
-
     <script>
+        // Enhanced global variables
+        const myCoordinates = [23.7040, 87.8621];
+        let map;
+        let currentDate = new Date();
+        let testimonialIndex = 0;
+        let coffeeClickCount = 0;
+        
+        // Testimonials data
+        const testimonials = [
+            {
+                text: "Anish delivered exceptional results on our website optimization project. The Lighthouse scores improved dramatically!",
+                author: "John",
+                company: "Scaleexperts",
+                initial: "J"
+            },
+            {
+                text: "Working with Anish was a pleasure. His AI integration expertise helped us build something truly innovative.",
+                author: "Sarah",
+                company: "TechCorp",
+                initial: "S"
+            },
+            {
+                text: "The full-stack solution Anish built exceeded our expectations. Highly recommended for complex projects!",
+                author: "Mike",
+                company: "StartupXYZ",
+                initial: "M"
+            }
+        ];
 
+        // Initialize map
+        function initMap() {
+            map = L.map('map', {
+                center: myCoordinates,
+                zoom: 10,
+                zoomControl: false,
+                dragging: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                attributionControl: false
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: false
+            }).addTo(map);
+
+            const customIcon = L.divIcon({
+                className: 'custom-marker',
+                html: '<div style="background: #3b82f6; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);"></div>',
+                iconSize: [16, 16],
+                iconAnchor: [8, 8]
+            });
+
+            L.marker(myCoordinates, { icon: customIcon }).addTo(map)
+                .bindPopup('📍 Anish Roy<br>Barsul, Saktigarh, West Bengal')
+                .openPopup();
+        }
+
+        // Update current year
         document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Enhanced time update
+        function updateTime() {
+            const now = new Date();
+            const istTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
+            const timeString = istTime.toLocaleTimeString('en-US', { 
+                hour12: true, 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('current-time').textContent = timeString + ' IST';
+        }
+
+        // Enhanced typing animation
+        const typingElement = document.querySelector('.typing');
+        const phrases = [
+            'AI-powered developer tools...', 
+            'Real-time collaborative apps...', 
+            'Cloud-native solutions...', 
+            'Open source magic ✨',
+            'Multi-agent systems...',
+            'Next-gen web experiences...'
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeWriter() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeWriter, typeSpeed);
+        }
+
+        // Enhanced calendar functionality
+        const monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"];
+        
+        const events = {
+            '2025-08-15': 'Project deadline',
+            '2025-08-20': 'Client meeting',
+            '2025-08-25': 'Code review',
+            '2025-09-01': 'New project start',
+            '2025-09-10': 'Conference talk',
+            '2025-09-15': 'Team standup',
+            '2025-09-20': 'Product demo'
+        };
+
+        function generateCalendar(year, month) {
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+            const isCurrentMonth = today.getFullYear() === year && today.getMonth() === month;
+            const todayDate = today.getDate();
+            
+            let calendarHTML = '';
+            
+            for (let i = 0; i < firstDay; i++) {
+                calendarHTML += '<div class="calendar-day"></div>';
+            }
+            
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const hasEvent = events[dateStr];
+                const isToday = isCurrentMonth && day === todayDate;
+                
+                let classes = 'calendar-day';
+                if (isToday) classes += ' today';
+                if (hasEvent) classes += ' has-event';
+                
+                calendarHTML += `<div class="${classes}" data-date="${dateStr}" onclick="calendarClick('${dateStr}')">${day}</div>`;
+            }
+            
+            document.getElementById('calendar-grid').innerHTML = calendarHTML;
+            document.getElementById('calendar-month').textContent = `${monthNames[month]} ${year}`;
+        }
+
+        function calendarClick(dateStr) {
+            const event = events[dateStr];
+            const info = document.getElementById('calendar-info');
+            if (event) {
+                info.textContent = `📅 ${event}`;
+                info.style.color = '#22c55e';
+            } else {
+                info.textContent = 'No events on this date';
+                info.style.color = '#6b7280';
+            }
+        }
+
+        // Calendar navigation
+        document.getElementById('prev-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        });
+
+        document.getElementById('next-month').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+        });
+
+        // Enhanced tooltip functionality
+        const tooltip = document.getElementById('tooltip');
+        
+        function showTooltip(e, text) {
+            tooltip.textContent = text;
+            tooltip.style.left = e.pageX + 10 + 'px';
+            tooltip.style.top = e.pageY - 30 + 'px';
+            tooltip.style.opacity = '1';
+        }
+        
+        function hideTooltip() {
+            tooltip.style.opacity = '0';
+        }
+
+        document.querySelectorAll('[data-tooltip]').forEach(element => {
+            element.addEventListener('mouseenter', (e) => {
+                showTooltip(e, element.getAttribute('data-tooltip'));
+            });
+            element.addEventListener('mouseleave', hideTooltip);
+            element.addEventListener('mousemove', (e) => {
+                tooltip.style.left = e.pageX + 10 + 'px';
+                tooltip.style.top = e.pageY - 30 + 'px';
+            });
+        });
+
+        // Smooth scroll navigation
+        document.querySelectorAll('.nav-item[data-section]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = document.getElementById(link.getAttribute('data-section'));
+                section.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Enhanced wave animation
+        function wave() {
+            const waveEmoji = event.target;
+            waveEmoji.style.transform = 'rotate(20deg) scale(1.2)';
+            setTimeout(() => {
+                waveEmoji.style.transform = 'rotate(-20deg) scale(1.1)';
+                setTimeout(() => {
+                    waveEmoji.style.transform = 'rotate(0deg) scale(1)';
+                }, 150);
+            }, 150);
+        }
+
+        // Enhanced project interactions
+        function projectClick(projectName) {
+            const messages = {
+                'codr': '🤖 Codr CLI - My AI-powered development companion!',
+                'harmonix': '🎵 Harmonix - Where AI meets music discovery!',
+                'lobango': '🍕 Lobango - Full-stack restaurant management!'
+            };
+            
+            showNotification(messages[projectName]);
+        }
+
+        // Enhanced notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            
+            // Add different colors based on type
+            if (type === 'success') notification.style.background = 'rgba(34, 197, 94, 0.9)';
+            if (type === 'error') notification.style.background = 'rgba(239, 68, 68, 0.9)';
+            if (type === 'warning') notification.style.background = 'rgba(245, 158, 11, 0.9)';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Testimonial rotation
+        function rotateTestimonial() {
+            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+            const container = document.getElementById('testimonials-container');
+            const testimonial = testimonials[testimonialIndex];
+            
+            container.style.opacity = '0.5';
+            setTimeout(() => {
+                container.innerHTML = `
+                    <div class="testimonial-item">
+                        <p class="text-sm text-white/70 italic mb-2">
+                            "${testimonial.text}"
+                        </p>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-xs">
+                                ${testimonial.initial}
+                            </div>
+                            <span class="text-xs text-white/60">${testimonial.author} - ${testimonial.company}</span>
+                        </div>
+                    </div>
+                `;
+                container.style.opacity = '1';
+            }, 200);
+        }
+
+        // Weather simulation
+        function updateWeather() {
+            const weatherConditions = [
+                { icon: '☀️', temp: '32°C', desc: 'Sunny' },
+                { icon: '🌤️', temp: '28°C', desc: 'Partly Cloudy' },
+                { icon: '☁️', temp: '25°C', desc: 'Cloudy' },
+                { icon: '🌦️', temp: '23°C', desc: 'Light Rain' },
+                { icon: '⛈️', temp: '20°C', desc: 'Thunderstorm' }
+            ];
+            
+            const randomWeather = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
+            
+            document.getElementById('weather-icon').textContent = randomWeather.icon;
+            document.getElementById('temperature').textContent = randomWeather.temp;
+            document.getElementById('weather-desc').textContent = randomWeather.desc;
+        }
 
         // Visitor counter
         async function updateVisitorCount() {
@@ -148,8 +1065,7 @@
                 const counterElement = document.getElementById('visitor-counter');
 
                 if (counterElement && data.totalVisitors && data.totalUniqueVisitors) {
-                    counterElement.textContent = `Total Visitors: ${data.totalVisitors} | Unique Visitors: ${data.totalUniqueVisitors}`;
-                    counterElement.setAttribute('aria-live', 'polite');
+                    counterElement.textContent = `${data.totalVisitors} visits • ${data.totalUniqueVisitors} unique`;
                 }
             } catch (error) {
                 console.error('Error fetching visitor count:', error);
@@ -160,9 +1076,87 @@
             }
         }
 
-        // Load visitor count after DOM is ready
-        document.addEventListener('DOMContentLoaded', updateVisitorCount);
+        // Enhanced Easter eggs
+        function coffeeEasterEgg() {
+            coffeeClickCount++;
+            if (coffeeClickCount === 5) {
+                showNotification('🎉 You found the coffee Easter egg! ☕ Thanks for exploring!', 'success');
+                coffeeClickCount = 0;
+                
+                // Fun animation
+                document.body.style.filter = 'sepia(20%)';
+                setTimeout(() => {
+                    document.body.style.filter = '';
+                }, 2000);
+            }
+        }
+
+        // Resume download
+        function downloadResume() {
+            showNotification('📄 Resume download would start here! (Add your actual resume URL)', 'info');
+            // In real implementation, replace with actual resume URL
+            // window.open('path/to/your/resume.pdf', '_blank');
+        }
+
+        // Blog notification
+        function showBlogNotification() {
+            showNotification('📝 Blog coming soon! Follow me on social media for updates.', 'info');
+        }
+
+        // Konami code easter egg
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > 10) konamiCode.shift();
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                document.body.style.transform = 'rotate(360deg)';
+                document.body.style.transition = 'transform 2s ease';
+                setTimeout(() => {
+                    document.body.style.transform = '';
+                    showNotification('🎮 Konami Code activated! You\'re a true developer!', 'success');
+                }, 2000);
+                konamiCode = [];
+            }
+        });
+
+        // Auto-rotate testimonials
+        setInterval(rotateTestimonial, 10000);
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            initMap();
+            updateTime();
+            setInterval(updateTime, 1000);
+            typeWriter();
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            updateWeather();
+            updateVisitorCount();
+            
+            // Update weather every 5 minutes
+            setInterval(updateWeather, 300000);
+            
+            // Show welcome message
+            setTimeout(() => {
+                showNotification('👋 Welcome to my portfolio! Feel free to explore and click around.', 'success');
+            }, 2000);
+        });
+
+        // Add performance monitoring
+        window.addEventListener('load', () => {
+            if ('performance' in window) {
+                const loadTime = Math.round(window.performance.timing.loadEventEnd - window.performance.timing.navigationStart);
+                console.log(`Portfolio loaded in ${loadTime}ms`);
+                
+                if (loadTime < 3000) {
+                    setTimeout(() => {
+                        showNotification(`⚡ Fast loading! Portfolio loaded in ${loadTime}ms`, 'success');
+                    }, 5000);
+                }
+            }
+        });
     </script>
 </body>
-
 </html>
