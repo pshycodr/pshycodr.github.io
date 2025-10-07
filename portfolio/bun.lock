@@ -4,6 +4,7 @@
     "": {
       "name": "portfolio",
       "dependencies": {
+        "framer-motion": "^12.23.22",
         "lucide-react": "^0.545.0",
         "motion": "^12.23.22",
         "next": "15.5.4",
