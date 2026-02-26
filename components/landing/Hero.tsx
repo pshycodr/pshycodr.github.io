@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef, useState } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -9,7 +11,29 @@ import { personal } from "@/contents/personal";
 
 import { Reveal } from "../shared";
 
+const TRANSITION_DURATION = 1;
+
 export default function Hero() {
+  const [peek, setPeek] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const hoverTimer = useRef<NodeJS.Timeout | null>(null);
+
+  const handleHoverStart = () => {
+    setHovered(true);
+
+    hoverTimer.current = setTimeout(() => {
+      setPeek(true);
+    }, TRANSITION_DURATION * 1000);
+  };
+
+  const handleHoverEnd = () => {
+    setHovered(false);
+
+    if (hoverTimer.current) clearTimeout(hoverTimer.current);
+    setPeek(false);
+  };
+
   return (
     <section className="border-b border-(--color-border) pb-10">
       <Reveal>
@@ -32,11 +56,13 @@ export default function Hero() {
                 @{personal.handle}
               </span>
             </h1>
+
             <p className="mb-6 text-sm text-(--color-text-secondary)">
               {personal.title} · {personal.location}
             </p>
+
             <p className="max-w-md font-serif text-lg leading-relaxed text-(--color-text-secondary) italic">
-              Software Developer building scalable web systems and{" "}
+              Software Developer building scalable web systems and <br />
               <u>AI-powered applications</u> using Next.js, TypeScript, cloud
               platforms, and modern backend architecture.
             </p>
@@ -49,6 +75,7 @@ export default function Hero() {
               >
                 résumé ↗
               </Link>
+
               <Link
                 href="https://devdump.tech"
                 className="border border-(--color-border) px-4 py-2 text-xs text-(--color-text-secondary) transition-colors hover:border-(--color-primary) hover:text-(--color-text-main)"
@@ -61,18 +88,45 @@ export default function Hero() {
 
         <Reveal delay={0.2}>
           <motion.div
+            onHoverStart={handleHoverStart}
+            onHoverEnd={handleHoverEnd}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="h-60 w-60 shrink-0 self-center overflow-hidden rounded-xl border border-(--color-border) sm:self-auto"
+            className="relative h-60 w-60 shrink-0 self-center sm:self-auto"
           >
-            <Image
-              src={personal.avatar}
-              alt={personal.name}
-              width={120}
-              height={120}
-              className="h-full w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
-              priority
-            />
+            <svg
+              className="pointer-events-none absolute inset-0 h-full w-full"
+              viewBox="0 0 240 240"
+              style={{ zIndex: 10 }}
+            >
+              <motion.circle
+                cx="120"
+                cy="120"
+                r="119"
+                fill="none"
+                stroke="var(--color-primary)"
+                strokeWidth="3"
+                strokeDasharray="748"
+                strokeLinecap="round"
+                initial={{ strokeDashoffset: 748 }}
+                animate={{ strokeDashoffset: hovered ? 0 : 748 }}
+                transition={{
+                  duration: TRANSITION_DURATION,
+                  ease: "easeInOut",
+                }}
+              />
+            </svg>
+
+            <div className="h-full w-full overflow-hidden rounded-full border border-(--color-border)">
+              <Image
+                src={peek ? "/peek.png" : personal.avatar}
+                alt={personal.name}
+                width={300}
+                height={300}
+                className="h-full w-full object-cover grayscale transition-all duration-500 hover:grayscale-0"
+                priority
+              />
+            </div>
           </motion.div>
         </Reveal>
       </div>
