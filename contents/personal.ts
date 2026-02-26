@@ -223,19 +223,26 @@ export const personal = {
       source: "https://github.com/codr-cli",
     },
     {
-      name: "Harmonix",
+      name: "Airctl",
       description:
-        "AI Music Discovery Platform — conversational recommendation engine integrating Google Gemini + Spotify OAuth for personalized music discovery.",
-      tags: ["Gemini", "Spotify API", "OAuth", "AI"],
-      source: "https://github.com/pshycodr/harmonix",
+        "A modern WiFi management tool for Linux built with GTK4 and Python. It provides a clean interface to scan, connect, and manage wireless networks. ",
+      tags: ["GTK4", "Python", "WiFi", "Linux"],
+      source: "https://github.com/pshycodr/airctl",
     },
     {
-      name: "Lobango",
+      name: "Harmonix",
       description:
-        "Restaurant management system with ordering + admin dashboard platform built with Next.js, Hono.js, Supabase, and Razorpay integration.",
-      tags: ["Next.js", "Hono.js", "Supabase", "Razorpay"],
-      url: "https://lobango.in",
+        "AI Music Discovery Platform - conversational recommendation engine integrating Google Gemini + Spotify OAuth for personalized music discovery.",
+      tags: ["Gemini", "Spotify API", "OAuth", "AI"],
+      source: "https://github.com/pshycodr/song-recommender-chatbot",
     },
+    // {
+    //   name: "Lobango",
+    //   description:
+    //     "Restaurant management system with ordering + admin dashboard platform built with Next.js, Hono.js, Supabase, and Razorpay integration.",
+    //   tags: ["Next.js", "Hono.js", "Supabase", "Razorpay"],
+    //   url: "https://lobango.in",
+    // },
     {
       name: "dev-dump",
       description:

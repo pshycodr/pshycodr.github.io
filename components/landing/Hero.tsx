@@ -36,10 +36,9 @@ export default function Hero() {
               {personal.title} · {personal.location}
             </p>
             <p className="max-w-md font-serif text-lg leading-relaxed text-(--color-text-secondary) italic">
-              <em> Software Developer </em>
-              building scalable web systems and AI-powered applications using
-              Next.js, TypeScript, cloud platforms, and modern backend
-              architecture.
+              Software Developer building scalable web systems and{" "}
+              <u>AI-powered applications</u> using Next.js, TypeScript, cloud
+              platforms, and modern backend architecture.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-4">

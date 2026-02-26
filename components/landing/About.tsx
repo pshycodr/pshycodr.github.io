@@ -18,18 +18,17 @@ export default function About() {
       <Reveal delay={0.1}>
         <div className="space-y-4">
           <p className="font-serif text-sm leading-relaxed text-(--color-text-secondary)">
-            I&apos;m a <em> software developer </em> who cares about
-            performance, clean architecture, and understanding how things work
-            under the hood. I work across the stack from building SSR-optimized
-            frontends in
-            <em> Next.js</em> to designing backend services, cloud
-            infrastructure, and <em>AI-powered workflows</em>.
+            I&apos;m a <em>software developer</em> focused on performance and
+            clean architecture. I build web applications with <em>Next.js</em>,
+            design backend services, work with cloud infrastructure, and develop
+            <em> AI-powered workflows</em>.
           </p>
+
           <p className="font-serif text-sm leading-relaxed text-(--color-text-secondary)">
-            I hold multiple Oracle certifications in AI, cloud, and database
-            architecture. When I&apos;m not shipping code, I&apos;m writing
-            deep-dives on systems internals, software architecture, and the
-            things I learn along the way.
+            I hold multiple <em>Oracle certifications</em> in AI, cloud, and
+            database architecture. Outside of shipping features, I write
+            technical deep-dives on systems internals and software architecture,
+            sharing what I learn while building real systems.
           </p>
         </div>
       </Reveal>

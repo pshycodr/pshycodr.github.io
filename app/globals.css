@@ -106,3 +106,8 @@ em {
   font-style: italic;
   color: var(--color-accent);
 }
+u {
+  text-decoration: underline;
+  text-decoration-color: var(--color-primary);
+  text-underline-offset: 0.2em;
+}
