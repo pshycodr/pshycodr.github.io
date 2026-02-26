@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap");
+@import "tailwindcss";
+
+:root {
+  --color-bg: #0f0f0f;
+  --color-surface: #171717;
+  --color-border: #242424;
+  --color-primary: #e8ff47;
+  --color-text-main: #e2e2e2;
+  --color-text-secondary: #888;
+  --color-text-muted: #444;
+  --color-accent: #ff5f5f;
+  --font-mono: "IBM Plex Mono", monospace;
+  --font-serif: "IBM Plex Serif", serif;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #f5f4ef;
+    --color-surface: #eceae2;
+    --color-border: #d4d0c4;
+    --color-primary: #5a6e00;
+    --color-text-main: #1a1a1a;
+    --color-text-secondary: #555550;
+    --color-text-muted: #aaa99f;
+    --color-accent: #c0392b;
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg: #0f0f0f;
+  --color-surface: #171717;
+  --color-border: #242424;
+  --color-primary: #e8ff47;
+  --color-text-main: #e2e2e2;
+  --color-text-secondary: #888;
+  --color-text-muted: #444;
+  --color-accent: #ff5f5f;
+}
+
+[data-theme="light"] {
+  --color-bg: #f5f4ef;
+  --color-surface: #eceae2;
+  --color-border: #d4d0c4;
+  --color-primary: #016801;
+  --color-text-main: #1a1a1a;
+  --color-text-secondary: #555550;
+  --color-text-muted: #aaa99f;
+  --color-accent: #c0392b;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-mono);
+  background-color: var(--color-bg);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 14px;
+}
+
+::selection {
+  background: var(--color-border);
+  color: var(--color-accent);
+}
+*:focus-visible {
+  outline: 1px solid var(--color-primary);
+  outline-offset: 2px;
+}
+::-webkit-scrollbar {
+  width: 2px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ── primary button ── */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #0f0f0f;
+}
+
+[data-theme="light"] .btn-primary {
+  background-color: #1a1a1a;
+  color: #f5f4ef;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .btn-primary {
+    background-color: #1a1a1a;
+    color: #f5f4ef;
+  }
+}
+
+em {
+  font-style: italic;
+  color: var(--color-accent);
+}
