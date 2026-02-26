@@ -11,7 +11,7 @@ import { personal } from "@/contents/personal";
 
 import { Reveal } from "../shared";
 
-const TRANSITION_DURATION = 1;
+const TRANSITION_DURATION = 2;
 
 export default function Hero() {
   const [peek, setPeek] = useState(false);
